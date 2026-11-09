@@ -1,5 +1,13 @@
-import { categories } from './categories.js';
-import { products } from './products.js';f
+
+import { products } from './products.js';
+
+const categories = [...new Set(products.map((product) => product.category))].map((category) => ({
+  name: category,
+  count: products.filter((product) => product.category === category).length,
+}));
+
+console.log('Categories:', categories);
+
 const categoryContainer = document.getElementById('category-container');
 
 categories.forEach((category) => {
@@ -53,12 +61,12 @@ products.forEach((product) => {
 
         <div class="flex flex-1 flex-col p-6">
           <p class="text-sm uppercase tracking-wide text-gray-500">
-            ${product.description}
+            ${product.title}
           </p>
 
           <h3 class="mt-2 min-h-14 text-lg font-semibold leading-7 text-gray-800">
             <a href="/products/20" class="line-clamp-2 hover:text-blue-600">
-              DANVOUY Womens T Shirt Casual Cotton Short
+              ${product.description}
             </a>
           </h3>
 
@@ -84,3 +92,5 @@ products.forEach((product) => {
           </div>
         </div>
       </article>`});
+
+     
